@@ -189,13 +189,18 @@ type FilterableFieldOp struct {
 
 // ParameterName returns the raw query parameter name for the filterable field.
 func (f *FilterableFieldOp) ParameterName() string {
+	return f.parameterName()
+}
+
+// ParameterName returns the raw query parameter name for the filterable field.
+func (f *FilterableFieldOp) parameterName() string {
 	if f.Edge != nil {
 		if f.Field == nil {
-			return "has." + CamelCase(SnakeCase(Singularize(f.Edge.Name)))
+			return "has" + CamelCase(SnakeCase(Singularize(f.Edge.Name)))
 		}
-		return CamelCase(SnakeCase(Singularize(f.Edge.Name))) + "." + CamelCase(f.Field.Name) + "." + predicateFormat(f.Operation)
+		return CamelCase(SnakeCase(Singularize(f.Edge.Name))) + CamelCase(f.Field.Name) + predicateFormat(f.Operation)
 	}
-	return CamelCase(f.Field.Name) + "." + predicateFormat(f.Operation)
+	return CamelCase(f.Field.Name) + predicateFormat(f.Operation)
 }
 
 // ComponentName returns the name/component alias for the parameter.
@@ -449,7 +454,7 @@ type FilterGroup struct {
 
 // ParameterName returns the raw query parameter name for the filter group.
 func (g *FilterGroup) ParameterName(op gen.Op) string {
-	return g.Name + "." + predicateFormat(op)
+	return g.Name + predicateFormat(op)
 }
 
 // Parameter returns the parameter for the filter group.
