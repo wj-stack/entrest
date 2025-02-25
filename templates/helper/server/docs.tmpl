@@ -15,14 +15,6 @@
 {{- define "helper/rest/server/docs/route" -}}
     {{ if not $.Annotations.RestConfig.DisableSpecHandler }}
         if !s.config.DisableSpecHandler && !s.config.DisableDocsHandler {
-            // If specs are enabled, it's safe to provide documentation, and if they don't override the
-            // root endpoint, we can redirect to the docs.
-            {{- template "helper/rest/server/endpoint" (dict
-                "Handler" $.Annotations.RestConfig.Handler
-                "Method" "GET"
-                "Path" "/"
-                "Func" "http.RedirectHandler(s.config.BasePath + \"/docs\", http.StatusTemporaryRedirect).ServeHTTP"
-            ) }}
             {{- template "helper/rest/server/endpoint" (dict
                 "Handler" $.Annotations.RestConfig.Handler
                 "Method" "GET"
@@ -61,12 +53,12 @@ var scalarTemplate = template.Must(template.New("docs").Parse(`<!DOCTYPE html>
         theme: "kepler",
         isEditable: false,
         hideDownloadButton: true,
-        customCss: ".darklight-reference-promo { visibility: hidden !important; height: 0 !important; }",
+        customCss: ".darklight-reference-promo { visibility: hidden !important; height: 0 !important; } .open-api-client-button { display: none !important; }",
       });
     </script>
     <script
-      src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.25.3"
-      integrity="sha256-NKouGW+1wM6fSI5l+lWltgWmD++6ircOAcyI3Sr8gR4="
+      src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.25.99"
+      integrity="sha256-uuOSJ5AN5uhftgJPc4yYZ3PZpdYcsolIRamzCKTiJnE="
       crossorigin="anonymous"
     ></script>
   </body>

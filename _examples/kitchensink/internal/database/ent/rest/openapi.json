@@ -620,6 +620,15 @@
                         "$ref": "#/components/parameters/EdgeOwnerEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasFriend"
                     },
                     {
@@ -801,6 +810,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFollowedByEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -1203,6 +1221,15 @@
                         "$ref": "#/components/parameters/EdgeUserEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/EdgeUserLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeUserLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeUserLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasFriend"
                     },
                     {
@@ -1297,6 +1324,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFriendEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtIsNil"
                     }
                 ],
                 "responses": {
@@ -2025,6 +2061,15 @@
                         "$ref": "#/components/parameters/EdgeOwnerEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasFriend"
                     },
                     {
@@ -2206,6 +2251,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFollowedByEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -2765,6 +2819,15 @@
                         "$ref": "#/components/parameters/UserEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasPet"
                     },
                     {
@@ -3021,6 +3084,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFriendEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -3404,6 +3476,15 @@
                         "$ref": "#/components/parameters/EdgeOwnerEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasFriend"
                     },
                     {
@@ -3585,6 +3666,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFollowedByEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -4104,6 +4194,15 @@
                         "$ref": "#/components/parameters/UserEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasPet"
                     },
                     {
@@ -4360,6 +4459,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFriendEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -4641,6 +4749,15 @@
                         "$ref": "#/components/parameters/UserEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasPet"
                     },
                     {
@@ -4897,6 +5014,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFriendEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -5508,6 +5634,15 @@
                         "$ref": "#/components/parameters/EdgeOwnerEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasFriend"
                     },
                     {
@@ -5689,6 +5824,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFollowedByEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -5902,6 +6046,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/UserEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/UserLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasPet"
@@ -6160,6 +6313,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFriendEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -6469,6 +6631,15 @@
                         "$ref": "#/components/parameters/EdgeUserEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/EdgeUserLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeUserLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeUserLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasFriend"
                     },
                     {
@@ -6563,6 +6734,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFriendEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFriendLastAuthenticatedAtIsNil"
                     }
                 ],
                 "responses": {
@@ -6864,6 +7044,15 @@
                         "$ref": "#/components/parameters/EdgeOwnerEmailHasSuffix"
                     },
                     {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeOwnerLastAuthenticatedAtIsNil"
+                    },
+                    {
                         "$ref": "#/components/parameters/EdgeHasFriend"
                     },
                     {
@@ -7045,6 +7234,15 @@
                     },
                     {
                         "$ref": "#/components/parameters/EdgeFollowedByEmailHasSuffix"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtNEQ"
+                    },
+                    {
+                        "$ref": "#/components/parameters/EdgeFollowedByLastAuthenticatedAtIsNil"
                     },
                     {
                         "$ref": "#/components/parameters/EdgeHasFollowing"
@@ -7643,7 +7841,8 @@
                         "format": "date-time"
                     },
                     "user_id": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "pet_id": {
                         "type": "integer"
@@ -7660,7 +7859,8 @@
                 "type": "object",
                 "properties": {
                     "user_id": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "pet_id": {
                         "type": "integer"
@@ -7754,10 +7954,12 @@
                         "format": "date-time"
                     },
                     "user_id": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "friend_id": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 },
                 "required": [
@@ -7776,10 +7978,12 @@
                         "format": "date-time"
                     },
                     "user_id": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "friend_id": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 },
                 "required": [
@@ -7840,10 +8044,12 @@
                         "format": "date-time"
                     },
                     "user_id": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "friend_id": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -7949,7 +8155,8 @@
                         }
                     },
                     "owner": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "friends": {
                         "type": "array",
@@ -7960,7 +8167,8 @@
                     "followed_by": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 },
@@ -8102,7 +8310,8 @@
                         }
                     },
                     "owner": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "add_friends": {
                         "type": "array",
@@ -8119,13 +8328,15 @@
                     "add_followed_by": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     },
                     "remove_followed_by": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 }
@@ -8246,13 +8457,15 @@
                     "add_admins": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     },
                     "remove_admins": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 }
@@ -8263,7 +8476,8 @@
                 "properties": {
                     "id": {
                         "description": "The ID of the User entity.",
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "created_at": {
                         "description": "Time in which the resource was initially created.",
@@ -8313,6 +8527,11 @@
                     "profile_url": {
                         "type": "string",
                         "default": "http://127.0.0.1/"
+                    },
+                    "last_authenticated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -8328,6 +8547,11 @@
                 "description": "A single User entity and the fields that can be created/updated.",
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "description": "The ID of the User entity. If not provided, one will be generated.",
+                        "type": "string",
+                        "format": "uuid"
+                    },
                     "name": {
                         "description": "Name of the user.",
                         "type": "string"
@@ -8371,6 +8595,11 @@
                         "type": "string",
                         "default": "http://127.0.0.1/"
                     },
+                    "last_authenticated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
                     "pets": {
                         "type": "array",
                         "items": {
@@ -8386,7 +8615,8 @@
                     "friends": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     },
                     "friendships": {
@@ -8471,8 +8701,6 @@
                     "following.count",
                     "friends.count",
                     "friendships.count",
-                    "friendships.friend_id.sum",
-                    "friendships.user_id.sum",
                     "id",
                     "name",
                     "pets.age.sum",
@@ -8538,6 +8766,11 @@
                         "type": "string",
                         "default": "http://127.0.0.1/"
                     },
+                    "last_authenticated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
                     "add_pets": {
                         "type": "array",
                         "items": {
@@ -8565,13 +8798,15 @@
                     "add_friends": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     },
                     "remove_friends": {
                         "type": "array",
                         "items": {
-                            "type": "integer"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     },
                     "add_friendships": {
@@ -8744,7 +8979,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "CategoryCreatedAtLT": {
@@ -8752,7 +8988,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "CategoryID": {
@@ -8807,7 +9044,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "CategoryUpdatedAtLT": {
@@ -8815,7 +9053,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeCategoryCreatedAtGT": {
@@ -8823,7 +9062,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeCategoryCreatedAtLT": {
@@ -8831,7 +9071,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeCategoryIDEQ": {
@@ -8877,7 +9118,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeCategoryUpdatedAtLT": {
@@ -8885,7 +9127,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFollowedByCreatedAtGT": {
@@ -8893,7 +9136,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFollowedByCreatedAtLT": {
@@ -8901,7 +9145,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFollowedByDescriptionContains": {
@@ -9027,7 +9272,8 @@
                 "in": "query",
                 "description": "Filters field \"id\" to be equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeFollowedByIDIn": {
@@ -9037,7 +9283,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -9046,7 +9293,8 @@
                 "in": "query",
                 "description": "Filters field \"id\" to be not equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeFollowedByIDNotIn": {
@@ -9056,8 +9304,35 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
+                }
+            },
+            "EdgeFollowedByLastAuthenticatedAtEQ": {
+                "name": "followedBy.lastAuthenticatedAt.eq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "EdgeFollowedByLastAuthenticatedAtIsNil": {
+                "name": "followedBy.lastAuthenticatedAt.null",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be null/nil.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "EdgeFollowedByLastAuthenticatedAtNEQ": {
+                "name": "followedBy.lastAuthenticatedAt.neq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be not equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFollowedByNameContains": {
@@ -9181,7 +9456,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFollowedByUpdatedAtLT": {
@@ -9189,7 +9465,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFollowedPetAgeEQ": {
@@ -9470,7 +9747,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFriendCreatedAtLT": {
@@ -9478,7 +9756,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFriendDescriptionContains": {
@@ -9604,7 +9883,8 @@
                 "in": "query",
                 "description": "Filters field \"id\" to be equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeFriendIDIn": {
@@ -9614,7 +9894,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -9623,7 +9904,8 @@
                 "in": "query",
                 "description": "Filters field \"id\" to be not equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeFriendIDNotIn": {
@@ -9633,8 +9915,35 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
+                }
+            },
+            "EdgeFriendLastAuthenticatedAtEQ": {
+                "name": "friend.lastAuthenticatedAt.eq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "EdgeFriendLastAuthenticatedAtIsNil": {
+                "name": "friend.lastAuthenticatedAt.null",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be null/nil.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "EdgeFriendLastAuthenticatedAtNEQ": {
+                "name": "friend.lastAuthenticatedAt.neq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be not equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFriendNameContains": {
@@ -9769,7 +10078,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFriendUpdatedAtLT": {
@@ -9777,7 +10087,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeFriendshipFriendIDEQ": {
@@ -9785,7 +10096,8 @@
                 "in": "query",
                 "description": "Filters field \"friend_id\" to be equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeFriendshipFriendIDIn": {
@@ -9795,7 +10107,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -9804,7 +10117,8 @@
                 "in": "query",
                 "description": "Filters field \"friend_id\" to be not equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeFriendshipFriendIDNotIn": {
@@ -9814,7 +10128,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -9861,7 +10176,8 @@
                 "in": "query",
                 "description": "Filters field \"user_id\" to be equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeFriendshipUserIDIn": {
@@ -9871,7 +10187,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -9880,7 +10197,8 @@
                 "in": "query",
                 "description": "Filters field \"user_id\" to be not equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeFriendshipUserIDNotIn": {
@@ -9890,7 +10208,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -9971,7 +10290,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeOwnerCreatedAtLT": {
@@ -9979,7 +10299,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeOwnerDescriptionContains": {
@@ -10105,7 +10426,8 @@
                 "in": "query",
                 "description": "Filters field \"id\" to be equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeOwnerIDIn": {
@@ -10115,7 +10437,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -10124,7 +10447,8 @@
                 "in": "query",
                 "description": "Filters field \"id\" to be not equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "EdgeOwnerIDNotIn": {
@@ -10134,8 +10458,35 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
+                }
+            },
+            "EdgeOwnerLastAuthenticatedAtEQ": {
+                "name": "owner.lastAuthenticatedAt.eq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "EdgeOwnerLastAuthenticatedAtIsNil": {
+                "name": "owner.lastAuthenticatedAt.null",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be null/nil.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "EdgeOwnerLastAuthenticatedAtNEQ": {
+                "name": "owner.lastAuthenticatedAt.neq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be not equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeOwnerNameContains": {
@@ -10259,7 +10610,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeOwnerUpdatedAtLT": {
@@ -10267,7 +10619,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgePetAgeEQ": {
@@ -10494,7 +10847,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeUserCreatedAtLT": {
@@ -10502,7 +10856,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeUserDescriptionContains": {
@@ -10621,6 +10976,32 @@
                 "description": "Filters field \"enabled\" to be equal to the provided value.",
                 "schema": {
                     "type": "boolean"
+                }
+            },
+            "EdgeUserLastAuthenticatedAtEQ": {
+                "name": "user.lastAuthenticatedAt.eq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "EdgeUserLastAuthenticatedAtIsNil": {
+                "name": "user.lastAuthenticatedAt.null",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be null/nil.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "EdgeUserLastAuthenticatedAtNEQ": {
+                "name": "user.lastAuthenticatedAt.neq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be not equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeUserNameContains": {
@@ -10744,7 +11125,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "EdgeUserUpdatedAtLT": {
@@ -10752,7 +11134,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "FilterOperation": {
@@ -10768,7 +11151,8 @@
                 "in": "query",
                 "description": "Filters field \"friend_id\" to be equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "FriendshipFriendIDIn": {
@@ -10778,7 +11162,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -10787,7 +11172,8 @@
                 "in": "query",
                 "description": "Filters field \"friend_id\" to be not equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "FriendshipFriendIDNotIn": {
@@ -10797,7 +11183,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -10853,7 +11240,8 @@
                 "in": "query",
                 "description": "Filters field \"user_id\" to be equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "FriendshipUserIDIn": {
@@ -10863,7 +11251,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -10872,7 +11261,8 @@
                 "in": "query",
                 "description": "Filters field \"user_id\" to be not equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "FriendshipUserIDNotIn": {
@@ -10882,7 +11272,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -11127,7 +11518,7 @@
             "PrettyResponse": {
                 "name": "pretty",
                 "in": "query",
-                "description": "If set to true, any JSON response will be indented. Not recommended for best performance.",
+                "description": "If set to true, any JSON response will be indented.",
                 "schema": {
                     "type": "boolean"
                 }
@@ -11146,7 +11537,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "SettingsCreatedAtLT": {
@@ -11154,7 +11546,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "SettingsIDEQ": {
@@ -11200,7 +11593,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "SettingsUpdatedAtLT": {
@@ -11208,7 +11602,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "UserCreatedAtGT": {
@@ -11216,7 +11611,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "UserCreatedAtLT": {
@@ -11224,7 +11620,8 @@
                 "in": "query",
                 "description": "Filters field \"created_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "UserDescriptionContains": {
@@ -11432,7 +11829,8 @@
                 "description": "The ID of the User to act upon.",
                 "required": true,
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "UserIDEQ": {
@@ -11440,7 +11838,8 @@
                 "in": "query",
                 "description": "Filters field \"id\" to be equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "UserIDIn": {
@@ -11450,7 +11849,8 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },
@@ -11459,7 +11859,8 @@
                 "in": "query",
                 "description": "Filters field \"id\" to be not equal to the provided value.",
                 "schema": {
-                    "type": "integer"
+                    "type": "string",
+                    "format": "uuid"
                 }
             },
             "UserIDNotIn": {
@@ -11469,8 +11870,35 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string",
+                        "format": "uuid"
                     }
+                }
+            },
+            "UserLastAuthenticatedAtEQ": {
+                "name": "lastAuthenticatedAt.eq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "UserLastAuthenticatedAtIsNil": {
+                "name": "lastAuthenticatedAt.null",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be null/nil.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "UserLastAuthenticatedAtNEQ": {
+                "name": "lastAuthenticatedAt.neq",
+                "in": "query",
+                "description": "Filters field \"last_authenticated_at\" to be not equal to the provided value.",
+                "schema": {
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "UserNameContains": {
@@ -11594,7 +12022,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be greater than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "UserUpdatedAtLT": {
@@ -11602,7 +12031,8 @@
                 "in": "query",
                 "description": "Filters field \"updated_at\" to be less than the provided value.",
                 "schema": {
-                    "type": "number"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "X-Request-Id": {

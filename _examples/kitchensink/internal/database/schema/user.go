@@ -15,7 +15,8 @@ import (
 	"entgo.io/ent/schema"
 	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
-	"github.com/google/go-github/v63/github"
+	"github.com/google/go-github/v66/github"
+	"github.com/google/uuid"
 	"github.com/lrstanley/entrest"
 	"github.com/ogen-go/ogen"
 )
@@ -26,7 +27,8 @@ type User struct {
 
 func (User) Fields() []ent.Field {
 	return []ent.Field{
-		field.Int("id").
+		field.UUID("id", uuid.Nil).
+			Default(uuid.New).
 			Unique().
 			Immutable().
 			Annotations(
@@ -107,6 +109,11 @@ func (User) Fields() []ent.Field {
 			}).
 			Default(DefaultExampleValuer()).
 			Annotations(entrest.WithSchema(ogen.String())),
+		field.Time("last_authenticated_at").
+			Optional().
+			Nillable().Annotations(
+			entrest.WithFilter(entrest.FilterGroupEqual),
+		),
 	}
 }
 
@@ -141,6 +148,7 @@ func (User) Annotations() []schema.Annotation {
 	return []schema.Annotation{
 		entrest.WithDefaultSort("name"),
 		entrest.WithDefaultOrder(entrest.OrderAsc),
+		entrest.WithAllowClientIDs(true),
 	}
 }
 

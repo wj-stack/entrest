@@ -5,6 +5,7 @@ package rest
 import (
 	"bytes"
 	_ "embed"
+	"encoding"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -18,6 +19,7 @@ import (
 	"time"
 
 	"github.com/go-playground/form/v4"
+	uuid "github.com/google/uuid"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/category"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/friendship"
@@ -85,6 +87,25 @@ var ErrMethodNotAllowed = errors.New("method not allowed")
 // IsMethodNotAllowed returns true if the unwrapped/underlying error is of type ErrMethodNotAllowed.
 func IsMethodNotAllowed(err error) bool {
 	return errors.Is(err, ErrMethodNotAllowed)
+}
+
+type ErrInvalidID struct {
+	ID  string
+	Err error
+}
+
+func (e ErrInvalidID) Error() string {
+	return fmt.Sprintf("invalid ID provided: %q: %v", e.ID, e.Err)
+}
+
+func (e ErrInvalidID) Unwrap() error {
+	return e.Err
+}
+
+// IsInvalidID returns true if the unwrapped/underlying error is of type ErrInvalidID.
+func IsInvalidID(err error) bool {
+	var target *ErrInvalidID
+	return errors.As(err, &target)
 }
 
 // JSON marshals 'v' to JSON, and setting the Content-Type as application/json.
@@ -167,11 +188,51 @@ func Req[Resp any](s *Server, op Operation, fn func(*http.Request) (*Resp, error
 	}
 }
 
+// resolveID resolves the ID from the request path, and unmarshals it into the provided type.
+// Only supports string, int, and types that support UnmarshalText, UnmarshalJSON, or UnmarshalBinary
+// (in that order).
+func resolveID[T any](r *http.Request) (id T, err error) {
+	value := r.PathValue("id")
+
+	switch any(id).(type) {
+	case string:
+		id = any(value).(T)
+	case int:
+		rid, err := strconv.Atoi(value)
+		if err == nil {
+			id = any(rid).(T)
+		}
+	default:
+		hasUnmarshal := false
+
+		// Check if the underlying type supports UnmarshalText, UnmarshalJSON, or UnmarshalBinary.
+		if u, ok := any(&id).(encoding.TextUnmarshaler); ok {
+			hasUnmarshal = true
+			err = u.UnmarshalText([]byte(value))
+		} else if u, ok := any(&id).(json.Unmarshaler); ok {
+			hasUnmarshal = true
+			err = u.UnmarshalJSON([]byte(value))
+		} else if u, ok := any(&id).(encoding.BinaryUnmarshaler); ok {
+			hasUnmarshal = true
+			err = u.UnmarshalBinary([]byte(value))
+		}
+
+		if !hasUnmarshal {
+			panic(fmt.Sprintf("unsupported ID type (cannot unmarshal): %T", id))
+		}
+	}
+
+	if err != nil {
+		return id, &ErrInvalidID{ID: value, Err: err}
+	}
+	return id, nil
+}
+
 // ReqID is similar to Req, but also processes an "id" path parameter and provides it to the
 // handler function.
-func ReqID[Resp any](s *Server, op Operation, fn func(*http.Request, int) (*Resp, error)) http.HandlerFunc {
+func ReqID[Resp, I any](s *Server, op Operation, fn func(*http.Request, I) (*Resp, error)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		id, err := strconv.Atoi(r.PathValue("id"))
+		id, err := resolveID[I](r)
 		if err != nil {
 			handleResponse[Resp](s, w, r, op, nil, err)
 			return
@@ -197,9 +258,9 @@ func ReqParam[Params, Resp any](s *Server, op Operation, fn func(*http.Request, 
 
 // ReqIDParam is similar to ReqParam, but also processes an "id" path parameter and request
 // body/query params, and provides it to the handler function.
-func ReqIDParam[Params, Resp any](s *Server, op Operation, fn func(*http.Request, int, *Params) (*Resp, error)) http.HandlerFunc {
+func ReqIDParam[Params, Resp, I any](s *Server, op Operation, fn func(*http.Request, I, *Params) (*Resp, error)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		id, err := strconv.Atoi(r.PathValue("id"))
+		id, err := resolveID[I](r)
 		if err != nil {
 			handleResponse[Resp](s, w, r, op, nil, err)
 			return
@@ -286,12 +347,12 @@ var scalarTemplate = template.Must(template.New("docs").Parse(`<!DOCTYPE html>
         theme: "kepler",
         isEditable: false,
         hideDownloadButton: true,
-        customCss: ".darklight-reference-promo { visibility: hidden !important; height: 0 !important; }",
+        customCss: ".darklight-reference-promo { visibility: hidden !important; height: 0 !important; } .open-api-client-button { display: none !important; }",
       });
     </script>
     <script
-      src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.25.3"
-      integrity="sha256-NKouGW+1wM6fSI5l+lWltgWmD++6ircOAcyI3Sr8gR4="
+      src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.25.99"
+      integrity="sha256-uuOSJ5AN5uhftgJPc4yYZ3PZpdYcsolIRamzCKTiJnE="
       crossorigin="anonymous"
     ></script>
   </body>
@@ -413,6 +474,8 @@ func (s *Server) DefaultErrorHandler(w http.ResponseWriter, r *http.Request, op 
 	case IsMethodNotAllowed(err):
 		resp.Code = http.StatusMethodNotAllowed
 	case IsBadRequest(err):
+		resp.Code = http.StatusBadRequest
+	case IsInvalidID(err):
 		resp.Code = http.StatusBadRequest
 	case errors.Is(err, privacy.Deny):
 		resp.Code = http.StatusForbidden
@@ -561,13 +624,20 @@ func (s *Server) Handler() http.Handler {
 	}
 
 	if !s.config.DisableSpecHandler && !s.config.DisableDocsHandler {
-		// If specs are enabled, it's safe to provide documentation, and if they don't override the
-		// root endpoint, we can redirect to the docs.
-		mux.HandleFunc("GET /", http.RedirectHandler(s.config.BasePath+"/docs", http.StatusTemporaryRedirect).ServeHTTP)
 		mux.HandleFunc("GET /docs", s.Docs)
 	}
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if !s.config.DisableSpecHandler && !s.config.DisableDocsHandler && r.URL.Path == "/" && r.Method == http.MethodGet {
+			// If specs are enabled, it's safe to provide documentation, and if they don't override the
+			// root endpoint, we can redirect to the docs.
+			http.Redirect(w, r, s.config.BasePath+"/docs", http.StatusTemporaryRedirect)
+			return
+		}
+		if r.Method != http.MethodGet {
+			handleResponse[struct{}](s, w, r, "", nil, ErrMethodNotAllowed)
+			return
+		}
 		handleResponse[struct{}](s, w, r, "", nil, ErrEndpointNotFound)
 	})
 	return http.StripPrefix(s.config.BasePath, UseEntContext(s.db)(mux))
@@ -719,27 +789,27 @@ func (s *Server) ListUsers(r *http.Request, p *ListUserParams) (*PagedResponse[e
 }
 
 // GetUser maps to "GET /users/{id}".
-func (s *Server) GetUser(r *http.Request, userID int) (*ent.User, error) {
+func (s *Server) GetUser(r *http.Request, userID uuid.UUID) (*ent.User, error) {
 	return EagerLoadUser(s.db.User.Query().Where(user.ID(userID))).Only(r.Context())
 }
 
 // ListUserPets maps to "GET /users/{id}/pets".
-func (s *Server) ListUserPets(r *http.Request, userID int, p *ListPetParams) (*PagedResponse[ent.Pet], error) {
+func (s *Server) ListUserPets(r *http.Request, userID uuid.UUID, p *ListPetParams) (*PagedResponse[ent.Pet], error) {
 	return p.Exec(r.Context(), s.db.User.Query().Where(user.ID(userID)).QueryPets())
 }
 
 // ListUserFollowedPets maps to "GET /users/{id}/followed-pets".
-func (s *Server) ListUserFollowedPets(r *http.Request, userID int, p *ListPetParams) (*PagedResponse[ent.Pet], error) {
+func (s *Server) ListUserFollowedPets(r *http.Request, userID uuid.UUID, p *ListPetParams) (*PagedResponse[ent.Pet], error) {
 	return p.Exec(r.Context(), s.db.User.Query().Where(user.ID(userID)).QueryFollowedPets())
 }
 
 // ListUserFriends maps to "GET /users/{id}/friends".
-func (s *Server) ListUserFriends(r *http.Request, userID int, p *ListUserParams) (*PagedResponse[ent.User], error) {
+func (s *Server) ListUserFriends(r *http.Request, userID uuid.UUID, p *ListUserParams) (*PagedResponse[ent.User], error) {
 	return p.Exec(r.Context(), s.db.User.Query().Where(user.ID(userID)).QueryFriends())
 }
 
 // ListUserFriendships maps to "GET /users/{id}/friendships".
-func (s *Server) ListUserFriendships(r *http.Request, userID int, p *ListFriendshipParams) (*PagedResponse[ent.Friendship], error) {
+func (s *Server) ListUserFriendships(r *http.Request, userID uuid.UUID, p *ListFriendshipParams) (*PagedResponse[ent.Friendship], error) {
 	return p.Exec(r.Context(), s.db.User.Query().Where(user.ID(userID)).QueryFriendships())
 }
 
@@ -749,11 +819,11 @@ func (s *Server) CreateUser(r *http.Request, p *CreateUserParams) (*ent.User, er
 }
 
 // UpdateUser maps to "PATCH /users/{id}".
-func (s *Server) UpdateUser(r *http.Request, userID int, p *UpdateUserParams) (*ent.User, error) {
+func (s *Server) UpdateUser(r *http.Request, userID uuid.UUID, p *UpdateUserParams) (*ent.User, error) {
 	return p.Exec(r.Context(), s.db.User.UpdateOneID(userID), s.db.User.Query())
 }
 
 // DeleteUser maps to "DELETE /users/{id}".
-func (s *Server) DeleteUser(r *http.Request, userID int) (*struct{}, error) {
+func (s *Server) DeleteUser(r *http.Request, userID uuid.UUID) (*struct{}, error) {
 	return nil, s.db.User.DeleteOneID(userID).Exec(r.Context())
 }

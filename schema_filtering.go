@@ -331,6 +331,7 @@ func (f *FilterableFieldOp) Parameter() *ogen.Parameter {
 	schema := &ogen.Schema{
 		Ref:        f.fieldSchema.Ref,
 		Type:       f.fieldSchema.Type,
+		Format:     f.fieldSchema.Format,
 		Items:      f.fieldSchema.Items,
 		Minimum:    f.fieldSchema.Minimum,
 		Maximum:    f.fieldSchema.Maximum,
@@ -341,9 +342,9 @@ func (f *FilterableFieldOp) Parameter() *ogen.Parameter {
 	}
 
 	if f.Operation == gen.GT || f.Operation == gen.LT || f.Operation == gen.GTE || f.Operation == gen.LTE {
-		if schema.Items != nil {
+		if schema.Items != nil && f.fieldSchema.Format != "date-time" {
 			schema.Items.Item.Type = "number"
-		} else {
+		} else if f.fieldSchema.Format != "date-time" {
 			schema.Type = "number"
 		}
 	}
@@ -351,8 +352,10 @@ func (f *FilterableFieldOp) Parameter() *ogen.Parameter {
 	if f.Operation == gen.IsNil {
 		if schema.Items != nil {
 			schema.Items.Item.Type = "boolean"
+			schema.Items.Item.Format = ""
 		} else {
 			schema.Type = "boolean"
+			schema.Format = ""
 		}
 	}
 

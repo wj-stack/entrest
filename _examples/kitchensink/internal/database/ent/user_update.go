@@ -11,7 +11,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/google/go-github/v63/github"
+	"github.com/google/go-github/v66/github"
+	"github.com/google/uuid"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/friendship"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/pet"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/predicate"
@@ -170,6 +171,26 @@ func (uu *UserUpdate) ClearProfileURL() *UserUpdate {
 	return uu
 }
 
+// SetLastAuthenticatedAt sets the "last_authenticated_at" field.
+func (uu *UserUpdate) SetLastAuthenticatedAt(t time.Time) *UserUpdate {
+	uu.mutation.SetLastAuthenticatedAt(t)
+	return uu
+}
+
+// SetNillableLastAuthenticatedAt sets the "last_authenticated_at" field if the given value is not nil.
+func (uu *UserUpdate) SetNillableLastAuthenticatedAt(t *time.Time) *UserUpdate {
+	if t != nil {
+		uu.SetLastAuthenticatedAt(*t)
+	}
+	return uu
+}
+
+// ClearLastAuthenticatedAt clears the value of the "last_authenticated_at" field.
+func (uu *UserUpdate) ClearLastAuthenticatedAt() *UserUpdate {
+	uu.mutation.ClearLastAuthenticatedAt()
+	return uu
+}
+
 // AddPetIDs adds the "pets" edge to the Pet entity by IDs.
 func (uu *UserUpdate) AddPetIDs(ids ...int) *UserUpdate {
 	uu.mutation.AddPetIDs(ids...)
@@ -201,14 +222,14 @@ func (uu *UserUpdate) AddFollowedPets(p ...*Pet) *UserUpdate {
 }
 
 // AddFriendIDs adds the "friends" edge to the User entity by IDs.
-func (uu *UserUpdate) AddFriendIDs(ids ...int) *UserUpdate {
+func (uu *UserUpdate) AddFriendIDs(ids ...uuid.UUID) *UserUpdate {
 	uu.mutation.AddFriendIDs(ids...)
 	return uu
 }
 
 // AddFriends adds the "friends" edges to the User entity.
 func (uu *UserUpdate) AddFriends(u ...*User) *UserUpdate {
-	ids := make([]int, len(u))
+	ids := make([]uuid.UUID, len(u))
 	for i := range u {
 		ids[i] = u[i].ID
 	}
@@ -284,14 +305,14 @@ func (uu *UserUpdate) ClearFriends() *UserUpdate {
 }
 
 // RemoveFriendIDs removes the "friends" edge to User entities by IDs.
-func (uu *UserUpdate) RemoveFriendIDs(ids ...int) *UserUpdate {
+func (uu *UserUpdate) RemoveFriendIDs(ids ...uuid.UUID) *UserUpdate {
 	uu.mutation.RemoveFriendIDs(ids...)
 	return uu
 }
 
 // RemoveFriends removes "friends" edges to User entities.
 func (uu *UserUpdate) RemoveFriends(u ...*User) *UserUpdate {
-	ids := make([]int, len(u))
+	ids := make([]uuid.UUID, len(u))
 	for i := range u {
 		ids[i] = u[i].ID
 	}
@@ -389,7 +410,7 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if err := uu.check(); err != nil {
 		return n, err
 	}
-	_spec := sqlgraph.NewUpdateSpec(user.Table, user.Columns, sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt))
+	_spec := sqlgraph.NewUpdateSpec(user.Table, user.Columns, sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID))
 	if ps := uu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
@@ -441,6 +462,12 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if uu.mutation.ProfileURLCleared() {
 		_spec.ClearField(user.FieldProfileURL, field.TypeOther)
+	}
+	if value, ok := uu.mutation.LastAuthenticatedAt(); ok {
+		_spec.SetField(user.FieldLastAuthenticatedAt, field.TypeTime, value)
+	}
+	if uu.mutation.LastAuthenticatedAtCleared() {
+		_spec.ClearField(user.FieldLastAuthenticatedAt, field.TypeTime)
 	}
 	if uu.mutation.PetsCleared() {
 		edge := &sqlgraph.EdgeSpec{
@@ -552,7 +579,7 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Columns: user.FriendsPrimaryKey,
 			Bidi:    true,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
 			},
 		}
 		createE := &FriendshipCreate{config: uu.config, mutation: newFriendshipMutation(uu.config, OpCreate)}
@@ -569,7 +596,7 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Columns: user.FriendsPrimaryKey,
 			Bidi:    true,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
 			},
 		}
 		for _, k := range nodes {
@@ -589,7 +616,7 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Columns: user.FriendsPrimaryKey,
 			Bidi:    true,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
 			},
 		}
 		for _, k := range nodes {
@@ -804,6 +831,26 @@ func (uuo *UserUpdateOne) ClearProfileURL() *UserUpdateOne {
 	return uuo
 }
 
+// SetLastAuthenticatedAt sets the "last_authenticated_at" field.
+func (uuo *UserUpdateOne) SetLastAuthenticatedAt(t time.Time) *UserUpdateOne {
+	uuo.mutation.SetLastAuthenticatedAt(t)
+	return uuo
+}
+
+// SetNillableLastAuthenticatedAt sets the "last_authenticated_at" field if the given value is not nil.
+func (uuo *UserUpdateOne) SetNillableLastAuthenticatedAt(t *time.Time) *UserUpdateOne {
+	if t != nil {
+		uuo.SetLastAuthenticatedAt(*t)
+	}
+	return uuo
+}
+
+// ClearLastAuthenticatedAt clears the value of the "last_authenticated_at" field.
+func (uuo *UserUpdateOne) ClearLastAuthenticatedAt() *UserUpdateOne {
+	uuo.mutation.ClearLastAuthenticatedAt()
+	return uuo
+}
+
 // AddPetIDs adds the "pets" edge to the Pet entity by IDs.
 func (uuo *UserUpdateOne) AddPetIDs(ids ...int) *UserUpdateOne {
 	uuo.mutation.AddPetIDs(ids...)
@@ -835,14 +882,14 @@ func (uuo *UserUpdateOne) AddFollowedPets(p ...*Pet) *UserUpdateOne {
 }
 
 // AddFriendIDs adds the "friends" edge to the User entity by IDs.
-func (uuo *UserUpdateOne) AddFriendIDs(ids ...int) *UserUpdateOne {
+func (uuo *UserUpdateOne) AddFriendIDs(ids ...uuid.UUID) *UserUpdateOne {
 	uuo.mutation.AddFriendIDs(ids...)
 	return uuo
 }
 
 // AddFriends adds the "friends" edges to the User entity.
 func (uuo *UserUpdateOne) AddFriends(u ...*User) *UserUpdateOne {
-	ids := make([]int, len(u))
+	ids := make([]uuid.UUID, len(u))
 	for i := range u {
 		ids[i] = u[i].ID
 	}
@@ -918,14 +965,14 @@ func (uuo *UserUpdateOne) ClearFriends() *UserUpdateOne {
 }
 
 // RemoveFriendIDs removes the "friends" edge to User entities by IDs.
-func (uuo *UserUpdateOne) RemoveFriendIDs(ids ...int) *UserUpdateOne {
+func (uuo *UserUpdateOne) RemoveFriendIDs(ids ...uuid.UUID) *UserUpdateOne {
 	uuo.mutation.RemoveFriendIDs(ids...)
 	return uuo
 }
 
 // RemoveFriends removes "friends" edges to User entities.
 func (uuo *UserUpdateOne) RemoveFriends(u ...*User) *UserUpdateOne {
-	ids := make([]int, len(u))
+	ids := make([]uuid.UUID, len(u))
 	for i := range u {
 		ids[i] = u[i].ID
 	}
@@ -1036,7 +1083,7 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (_node *User, err error) 
 	if err := uuo.check(); err != nil {
 		return _node, err
 	}
-	_spec := sqlgraph.NewUpdateSpec(user.Table, user.Columns, sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt))
+	_spec := sqlgraph.NewUpdateSpec(user.Table, user.Columns, sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID))
 	id, ok := uuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "User.id" for update`)}
@@ -1105,6 +1152,12 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (_node *User, err error) 
 	}
 	if uuo.mutation.ProfileURLCleared() {
 		_spec.ClearField(user.FieldProfileURL, field.TypeOther)
+	}
+	if value, ok := uuo.mutation.LastAuthenticatedAt(); ok {
+		_spec.SetField(user.FieldLastAuthenticatedAt, field.TypeTime, value)
+	}
+	if uuo.mutation.LastAuthenticatedAtCleared() {
+		_spec.ClearField(user.FieldLastAuthenticatedAt, field.TypeTime)
 	}
 	if uuo.mutation.PetsCleared() {
 		edge := &sqlgraph.EdgeSpec{
@@ -1216,7 +1269,7 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (_node *User, err error) 
 			Columns: user.FriendsPrimaryKey,
 			Bidi:    true,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
 			},
 		}
 		createE := &FriendshipCreate{config: uuo.config, mutation: newFriendshipMutation(uuo.config, OpCreate)}
@@ -1233,7 +1286,7 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (_node *User, err error) 
 			Columns: user.FriendsPrimaryKey,
 			Bidi:    true,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
 			},
 		}
 		for _, k := range nodes {
@@ -1253,7 +1306,7 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (_node *User, err error) 
 			Columns: user.FriendsPrimaryKey,
 			Bidi:    true,
 			Target: &sqlgraph.EdgeTarget{
-				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeInt),
+				IDSpec: sqlgraph.NewFieldSpec(user.FieldID, field.TypeUUID),
 			},
 		}
 		for _, k := range nodes {

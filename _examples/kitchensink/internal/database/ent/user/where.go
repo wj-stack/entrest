@@ -7,52 +7,53 @@ import (
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
+	"github.com/google/uuid"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/predicate"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/schema"
 )
 
 // ID filters vertices based on their ID field.
-func ID(id int) predicate.User {
+func ID(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldID, id))
 }
 
 // IDEQ applies the EQ predicate on the ID field.
-func IDEQ(id int) predicate.User {
+func IDEQ(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldID, id))
 }
 
 // IDNEQ applies the NEQ predicate on the ID field.
-func IDNEQ(id int) predicate.User {
+func IDNEQ(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldNEQ(FieldID, id))
 }
 
 // IDIn applies the In predicate on the ID field.
-func IDIn(ids ...int) predicate.User {
+func IDIn(ids ...uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldIn(FieldID, ids...))
 }
 
 // IDNotIn applies the NotIn predicate on the ID field.
-func IDNotIn(ids ...int) predicate.User {
+func IDNotIn(ids ...uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldNotIn(FieldID, ids...))
 }
 
 // IDGT applies the GT predicate on the ID field.
-func IDGT(id int) predicate.User {
+func IDGT(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldGT(FieldID, id))
 }
 
 // IDGTE applies the GTE predicate on the ID field.
-func IDGTE(id int) predicate.User {
+func IDGTE(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldGTE(FieldID, id))
 }
 
 // IDLT applies the LT predicate on the ID field.
-func IDLT(id int) predicate.User {
+func IDLT(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldLT(FieldID, id))
 }
 
 // IDLTE applies the LTE predicate on the ID field.
-func IDLTE(id int) predicate.User {
+func IDLTE(id uuid.UUID) predicate.User {
 	return predicate.User(sql.FieldLTE(FieldID, id))
 }
 
@@ -99,6 +100,11 @@ func PasswordHashed(v string) predicate.User {
 // ProfileURL applies equality check predicate on the "profile_url" field. It's identical to ProfileURLEQ.
 func ProfileURL(v *schema.ExampleValuer) predicate.User {
 	return predicate.User(sql.FieldEQ(FieldProfileURL, v))
+}
+
+// LastAuthenticatedAt applies equality check predicate on the "last_authenticated_at" field. It's identical to LastAuthenticatedAtEQ.
+func LastAuthenticatedAt(v time.Time) predicate.User {
+	return predicate.User(sql.FieldEQ(FieldLastAuthenticatedAt, v))
 }
 
 // CreatedAtEQ applies the EQ predicate on the "created_at" field.
@@ -599,6 +605,56 @@ func ProfileURLIsNil() predicate.User {
 // ProfileURLNotNil applies the NotNil predicate on the "profile_url" field.
 func ProfileURLNotNil() predicate.User {
 	return predicate.User(sql.FieldNotNull(FieldProfileURL))
+}
+
+// LastAuthenticatedAtEQ applies the EQ predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtEQ(v time.Time) predicate.User {
+	return predicate.User(sql.FieldEQ(FieldLastAuthenticatedAt, v))
+}
+
+// LastAuthenticatedAtNEQ applies the NEQ predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtNEQ(v time.Time) predicate.User {
+	return predicate.User(sql.FieldNEQ(FieldLastAuthenticatedAt, v))
+}
+
+// LastAuthenticatedAtIn applies the In predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtIn(vs ...time.Time) predicate.User {
+	return predicate.User(sql.FieldIn(FieldLastAuthenticatedAt, vs...))
+}
+
+// LastAuthenticatedAtNotIn applies the NotIn predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtNotIn(vs ...time.Time) predicate.User {
+	return predicate.User(sql.FieldNotIn(FieldLastAuthenticatedAt, vs...))
+}
+
+// LastAuthenticatedAtGT applies the GT predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtGT(v time.Time) predicate.User {
+	return predicate.User(sql.FieldGT(FieldLastAuthenticatedAt, v))
+}
+
+// LastAuthenticatedAtGTE applies the GTE predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtGTE(v time.Time) predicate.User {
+	return predicate.User(sql.FieldGTE(FieldLastAuthenticatedAt, v))
+}
+
+// LastAuthenticatedAtLT applies the LT predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtLT(v time.Time) predicate.User {
+	return predicate.User(sql.FieldLT(FieldLastAuthenticatedAt, v))
+}
+
+// LastAuthenticatedAtLTE applies the LTE predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtLTE(v time.Time) predicate.User {
+	return predicate.User(sql.FieldLTE(FieldLastAuthenticatedAt, v))
+}
+
+// LastAuthenticatedAtIsNil applies the IsNil predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtIsNil() predicate.User {
+	return predicate.User(sql.FieldIsNull(FieldLastAuthenticatedAt))
+}
+
+// LastAuthenticatedAtNotNil applies the NotNil predicate on the "last_authenticated_at" field.
+func LastAuthenticatedAtNotNil() predicate.User {
+	return predicate.User(sql.FieldNotNull(FieldLastAuthenticatedAt))
 }
 
 // HasPets applies the HasEdge predicate on the "pets" edge.

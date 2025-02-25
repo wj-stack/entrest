@@ -10,7 +10,8 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/google/go-github/v63/github"
+	"github.com/google/go-github/v66/github"
+	"github.com/google/uuid"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/user"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/schema"
 )
@@ -19,7 +20,7 @@ import (
 type User struct {
 	config `json:"-"`
 	// ID of the ent.
-	ID int `json:"id,omitempty"`
+	ID uuid.UUID `json:"id,omitempty"`
 	// Time in which the resource was initially created.
 	CreatedAt time.Time `json:"created_at"`
 	// Time that the resource was last updated.
@@ -42,6 +43,8 @@ type User struct {
 	GithubData *github.User `json:"github_data"`
 	// ProfileURL holds the value of the "profile_url" field.
 	ProfileURL *schema.ExampleValuer `json:"profile_url"`
+	// LastAuthenticatedAt holds the value of the "last_authenticated_at" field.
+	LastAuthenticatedAt *time.Time `json:"last_authenticated_at"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the UserQuery when eager-loading is set.
 	Edges           UserEdges `json:"edges"`
@@ -122,12 +125,12 @@ func (*User) scanValues(columns []string) ([]any, error) {
 			values[i] = new(schema.ExampleValuer)
 		case user.FieldEnabled:
 			values[i] = new(sql.NullBool)
-		case user.FieldID:
-			values[i] = new(sql.NullInt64)
 		case user.FieldName, user.FieldType, user.FieldDescription, user.FieldEmail, user.FieldPasswordHashed:
 			values[i] = new(sql.NullString)
-		case user.FieldCreatedAt, user.FieldUpdatedAt:
+		case user.FieldCreatedAt, user.FieldUpdatedAt, user.FieldLastAuthenticatedAt:
 			values[i] = new(sql.NullTime)
+		case user.FieldID:
+			values[i] = new(uuid.UUID)
 		case user.ForeignKeys[0]: // settings_admins
 			values[i] = new(sql.NullInt64)
 		default:
@@ -146,11 +149,11 @@ func (u *User) assignValues(columns []string, values []any) error {
 	for i := range columns {
 		switch columns[i] {
 		case user.FieldID:
-			value, ok := values[i].(*sql.NullInt64)
-			if !ok {
-				return fmt.Errorf("unexpected type %T for field id", value)
+			if value, ok := values[i].(*uuid.UUID); !ok {
+				return fmt.Errorf("unexpected type %T for field id", values[i])
+			} else if value != nil {
+				u.ID = *value
 			}
-			u.ID = int(value.Int64)
 		case user.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
@@ -220,6 +223,13 @@ func (u *User) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field profile_url", values[i])
 			} else if value != nil {
 				u.ProfileURL = value
+			}
+		case user.FieldLastAuthenticatedAt:
+			if value, ok := values[i].(*sql.NullTime); !ok {
+				return fmt.Errorf("unexpected type %T for field last_authenticated_at", values[i])
+			} else if value.Valid {
+				u.LastAuthenticatedAt = new(time.Time)
+				*u.LastAuthenticatedAt = value.Time
 			}
 		case user.ForeignKeys[0]:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
@@ -326,6 +336,11 @@ func (u *User) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("profile_url=")
 	builder.WriteString(fmt.Sprintf("%v", u.ProfileURL))
+	builder.WriteString(", ")
+	if v := u.LastAuthenticatedAt; v != nil {
+		builder.WriteString("last_authenticated_at=")
+		builder.WriteString(v.Format(time.ANSIC))
+	}
 	builder.WriteByte(')')
 	return builder.String()
 }

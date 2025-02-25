@@ -6,7 +6,8 @@ import (
 	"context"
 	"time"
 
-	github "github.com/google/go-github/v63/github"
+	github "github.com/google/go-github/v66/github"
+	uuid "github.com/google/uuid"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/category"
 	"github.com/lrstanley/entrest/_examples/kitchensink/internal/database/ent/follows"
@@ -54,8 +55,8 @@ func (c *CreateCategoryParams) Exec(ctx context.Context, builder *ent.CategoryCr
 
 // CreateFollowParams defines parameters for creating a Follow via a POST request.
 type CreateFollowParams struct {
-	UserID int `json:"user_id"`
-	PetID  int `json:"pet_id"`
+	UserID uuid.UUID `json:"user_id"`
+	PetID  int       `json:"pet_id"`
 }
 
 func (c *CreateFollowParams) ApplyInputs(builder *ent.FollowsCreate) *ent.FollowsCreate {
@@ -82,8 +83,8 @@ func (c *CreateFollowParams) Exec(ctx context.Context, builder *ent.FollowsCreat
 // CreateFriendshipParams defines parameters for creating a Friendship via a POST request.
 type CreateFriendshipParams struct {
 	CreatedAt *time.Time `json:"created_at"`
-	UserID    int        `json:"user_id"`
-	FriendID  int        `json:"friend_id"`
+	UserID    uuid.UUID  `json:"user_id"`
+	FriendID  uuid.UUID  `json:"friend_id"`
 }
 
 func (c *CreateFriendshipParams) ApplyInputs(builder *ent.FriendshipCreate) *ent.FriendshipCreate {
@@ -115,11 +116,11 @@ type CreatePetParams struct {
 	// Categories that the pet belongs to.
 	Categories []int `json:"categories,omitempty"`
 	// The user that owns the pet.
-	Owner *int `json:"owner,omitempty"`
+	Owner *uuid.UUID `json:"owner,omitempty"`
 	// Pets that this pet is friends with.
 	Friends []int `json:"friends,omitempty"`
 	// Users that this pet is followed by.
-	FollowedBy []int `json:"followed_by,omitempty"`
+	FollowedBy []uuid.UUID `json:"followed_by,omitempty"`
 }
 
 func (c *CreatePetParams) ApplyInputs(builder *ent.PetCreate) *ent.PetCreate {
@@ -154,7 +155,7 @@ type CreateSettingParams struct {
 	// Global banner text to apply to the frontend.
 	GlobalBanner *string `json:"global_banner,omitempty"`
 	// Administrators for the platform.
-	Admins []int `json:"admins,omitempty"`
+	Admins []uuid.UUID `json:"admins,omitempty"`
 }
 
 func (c *CreateSettingParams) ApplyInputs(builder *ent.SettingsCreate) *ent.SettingsCreate {
@@ -178,6 +179,7 @@ func (c *CreateSettingParams) Exec(ctx context.Context, builder *ent.SettingsCre
 
 // CreateUserParams defines parameters for creating a User via a POST request.
 type CreateUserParams struct {
+	ID *uuid.UUID `json:"id"`
 	// Name of the user.
 	Name string `json:"name"`
 	// Type of object being defined (user or system which is for internal usecases).
@@ -193,18 +195,22 @@ type CreateUserParams struct {
 	// Hashed password for the user, this shouldn't be readable in the spec anywhere.
 	PasswordHashed string `json:"password_hashed"`
 	// The github user raw JSON data.
-	GithubData *github.User          `json:"github_data,omitempty"`
-	ProfileURL *schema.ExampleValuer `json:"profile_url,omitempty"`
+	GithubData          *github.User          `json:"github_data,omitempty"`
+	ProfileURL          *schema.ExampleValuer `json:"profile_url,omitempty"`
+	LastAuthenticatedAt *time.Time            `json:"last_authenticated_at,omitempty"`
 	// Pets owned by the user.
 	Pets []int `json:"pets,omitempty"`
 	// Pets that the user is following.
 	FollowedPets []int `json:"followed_pets,omitempty"`
 	// Friends of the user.
-	Friends     []int `json:"friends,omitempty"`
-	Friendships []int `json:"friendships,omitempty"`
+	Friends     []uuid.UUID `json:"friends,omitempty"`
+	Friendships []int       `json:"friendships,omitempty"`
 }
 
 func (c *CreateUserParams) ApplyInputs(builder *ent.UserCreate) *ent.UserCreate {
+	if c.ID != nil {
+		builder.SetID(*c.ID)
+	}
 	builder.SetName(c.Name)
 	if c.Type != nil {
 		builder.SetType(*c.Type)
@@ -227,6 +233,9 @@ func (c *CreateUserParams) ApplyInputs(builder *ent.UserCreate) *ent.UserCreate 
 	}
 	if c.ProfileURL != nil {
 		builder.SetProfileURL(c.ProfileURL)
+	}
+	if c.LastAuthenticatedAt != nil {
+		builder.SetLastAuthenticatedAt(*c.LastAuthenticatedAt)
 	}
 	builder.AddPetIDs(c.Pets...)
 	builder.AddFollowedPetIDs(c.FollowedPets...)
